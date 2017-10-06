@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Топ мастеров</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700"/>-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+<h1>Input</h1>
+<!--<div>-->
+    <!--<form name="booking">-->
+        <!--<textarea name="message" rows="20" cols="130" wrap="virtual">{-->
+            <!--"start" : "0900",-->
+            <!--"end" : "1730",-->
+            <!--"bookingList" : [-->
+                <!--{"bookingDate" : "2011-03-17 10:17:06", "employerName" : "EMP001", "meetingDate" : "2011-03-21 09:00", "duration" : 2},-->
+                <!--{"bookingDate" : "2011-03-16 12:34:56", "employerName" : "EMP002", "meetingDate" : "2011-03-21 09:00", "duration" : 2},-->
+                <!--{"bookingDate" : "2011-03-16 09:28:23", "employerName" : "EMP003", "meetingDate" : "2011-03-22 14:00", "duration" : 2},-->
+                <!--{"bookingDate" : "2011-03-17 11:23:45", "employerName" : "EMP004", "meetingDate" : "2011-03-22 16:00", "duration" : 1},-->
+                <!--{"bookingDate" : "2011-03-15 17:29:12", "employerName" : "EMP005", "meetingDate" : "2011-03-21 16:00", "duration" : 3}-->
+            <!--]-->
+        <!--}</textarea>-->
+        <!--<button type="submit" onclick="sendForm()">Reserve</button>-->
+    <!--</form>-->
+
+<!--</div>-->
+
+<div>
+    <form name="booking">
+        <textarea name="message" rows="20" cols="130" wrap="virtual">{
+            [
+                {"bookingDate" : "2011-03-17 10:17:06", "employerName" : "EMP001", "meetingDate" : "2011-03-21 09:00", "duration" : 2},
+                {"bookingDate" : "2011-03-16 12:34:56", "employerName" : "EMP002", "meetingDate" : "2011-03-21 09:00", "duration" : 2},
+                {"bookingDate" : "2011-03-16 09:28:23", "employerName" : "EMP003", "meetingDate" : "2011-03-22 14:00", "duration" : 2},
+                {"bookingDate" : "2011-03-17 11:23:45", "employerName" : "EMP004", "meetingDate" : "2011-03-22 16:00", "duration" : 1},
+                {"bookingDate" : "2011-03-15 17:29:12", "employerName" : "EMP005", "meetingDate" : "2011-03-21 16:00", "duration" : 3}
+            ]
+        }</textarea>
+        <button type="submit" onclick="sendForm()">Reserve</button>
+    </form>
+
+</div>
+
+<script type="text/javascript">
+    function sendForm() {
+        var message = document.booking.message.value;
+        message = JSON.parse(message);
+        $.ajax({
+            type: 'POST',
+            url: '/api/reserve',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(message),
+            dataType: 'json',
+            async: true,
+            success: function(result) {
+//                alert(result)
+                console.log(result)
+                alert("TEST")
+            },
+            error: function (jqXHR, testStatus, errorThrown) {
+//                alert(jqXHR.status + ' ' + jqXHR.responseText)
+                alert("ERROR")
+            }
+        });
+
+    }
+
+</script>
+
+</body>
+</html>

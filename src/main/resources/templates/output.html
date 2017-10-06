@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Топ мастеров</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700"/>
+</head>
+<body>
+
+<FORM NAME="Sel1">
+    <!-- Анкета -->
+    <TABLE>
+        <TR>
+            <TD>Фамилия:</TD>
+            <TD><INPUT NAME="Family"/></TD>
+        </TR>
+        <TR>
+            <TD>Имя:</TD>
+            <TD><INPUT NAME="Name"/></TD>
+        </TR>
+        <TR>
+            <TD>Возраст:</TD>
+            <TD><INPUT NAME="Age"/>
+            </TD>
+        </TR>
+        <TR>
+            <TD>Телефон:</TD>
+            <TD><INPUT NAME="Phone"/></TD>
+        </TR>
+    </TABLE>
+    <!-- Кнопки готовности и сброса -->
+    <INPUT TYPE="button" VALUE="Готово" onClick="Complete();"/>
+</FORM>
+
+<script>
+    function Complete() {
+        var Elem = "Фамилия: " + document.Sel1.Family.value +
+            "\nИмя: " + document.Sel1.Name.value +
+            "\nВозраст: " + document.Sel1.Age.value +
+            "\nТелефон: " + document.Sel1.Phone.value;
+        alert(Elem);
+    }
+
+</script>
+<!--<script type="text/javascript" src="../static/js/script.js" th:href="@{/js/scrip.js}"/>-->
+</body>
+</html>
