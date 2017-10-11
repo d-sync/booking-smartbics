@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalTime;
 
+/* аннотация @Data нужна для генерации геттеров и сеттеров.
+   чтобы она работала нужно в Idea подключить Lombok Plugin
+*/
 @Data
 @Entity
 public class MeetingInformation {

@@ -6,6 +6,9 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/* аннотация @Data нужна для генерации геттеров и сеттеров.
+   чтобы она работала нужно в Idea подключить Lombok Plugin
+*/
 @Data
 public class Booking {
 
