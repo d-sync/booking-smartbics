@@ -1,28 +1,35 @@
 package com.smartbics.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import java.time.LocalTime;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class Booking {
 
-	private LocalTime start;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime bookingTime;
 
-	private LocalTime end;
+	private String emp;
 
-	private List<MeetingReq> bookingList;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime meetingTime;
 
-	public Booking() {
-	}
+	private int duration;
 
 	@Override
 	public String toString() {
 		return "Booking{" +
-				"start='" + start + '\'' +
-				", end='" + end + '\'' +
-				", bookingList=" + bookingList +
+				"bookingTime=" + bookingTime +
+				", emp='" + emp + '\'' +
+				", meetingTime=" + meetingTime +
+				", duration=" + duration +
 				'}';
+	}
+
+	public LocalDate getLocalDateOfMeetingTime() {
+		return meetingTime.toLocalDate();
 	}
 }

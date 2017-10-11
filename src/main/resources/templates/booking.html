@@ -2,42 +2,47 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Топ мастеров</title>
+    <title>Booking</title>
     <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}"/>
-    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700"/>-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 </head>
 <body>
-<h1>Input</h1>
-<!--<div>-->
-    <!--<form name="booking">-->
-        <!--<textarea name="message" rows="20" cols="130" wrap="virtual">{-->
-            <!--"start" : "0900",-->
-            <!--"end" : "1730",-->
-            <!--"bookingList" : [-->
-                <!--{"bookingDate" : "2011-03-17 10:17:06", "employerName" : "EMP001", "meetingDate" : "2011-03-21 09:00", "duration" : 2},-->
-                <!--{"bookingDate" : "2011-03-16 12:34:56", "employerName" : "EMP002", "meetingDate" : "2011-03-21 09:00", "duration" : 2},-->
-                <!--{"bookingDate" : "2011-03-16 09:28:23", "employerName" : "EMP003", "meetingDate" : "2011-03-22 14:00", "duration" : 2},-->
-                <!--{"bookingDate" : "2011-03-17 11:23:45", "employerName" : "EMP004", "meetingDate" : "2011-03-22 16:00", "duration" : 1},-->
-                <!--{"bookingDate" : "2011-03-15 17:29:12", "employerName" : "EMP005", "meetingDate" : "2011-03-21 16:00", "duration" : 3}-->
-            <!--]-->
-        <!--}</textarea>-->
-        <!--<button type="submit" onclick="sendForm()">Reserve</button>-->
-    <!--</form>-->
-
-<!--</div>-->
-
 <div>
-    <form name="booking">
-        <textarea name="message" rows="20" cols="130" wrap="virtual">{
-            [
-                {"bookingDate" : "2011-03-17 10:17:06", "employerName" : "EMP001", "meetingDate" : "2011-03-21 09:00", "duration" : 2},
-                {"bookingDate" : "2011-03-16 12:34:56", "employerName" : "EMP002", "meetingDate" : "2011-03-21 09:00", "duration" : 2},
-                {"bookingDate" : "2011-03-16 09:28:23", "employerName" : "EMP003", "meetingDate" : "2011-03-22 14:00", "duration" : 2},
-                {"bookingDate" : "2011-03-17 11:23:45", "employerName" : "EMP004", "meetingDate" : "2011-03-22 16:00", "duration" : 1},
-                {"bookingDate" : "2011-03-15 17:29:12", "employerName" : "EMP005", "meetingDate" : "2011-03-21 16:00", "duration" : 3}
-            ]
-        }</textarea>
+    <table>
+        <tr>
+            <td>
+                В поле для ввода текста находится строка представляющая тот самый json обьект из "A sample input text" в задании.
+                Я решил что время начала и конца рабочего дня константно и в json его отображать нет смысла.
+                При нажатии на "Reserve" контроллер на сервере принимает json и десериализует его в список обьектов Booking.
+                Далее метод сервиса getMeetingsOfBookings отсеивает неподходящие по условию задания букинги и из подходящих формирует
+                список обьектов Meeting, сохраняет эти обьекты в БД и возвращает список на вьюшку в виде json (на вьюшке это не отображается т.к. это уже задача фронтэнд
+                разработчика). Я решил хранить обьекты в базе а не в памяти, т.к. это правильнее.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Получить совещания на определенную дату: <a href="/api/meeting?date=2011-03-22" target="_blank">/api/meeting?date=2011-03-22</a>
+                (в новом окне)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Получить все совещания: <a href="/api/meetings" target="_blank">/api/meetings</a>
+                (в новом окне)
+            </td>
+        </tr>
+    </table>
+
+</div>
+<div>
+    <form name="booking" method="post">
+        <textarea name="message" rows="15" cols="110" wrap="virtual">[
+                {"bookingTime" : "2011-03-17 10:17:06", "emp" : "EMP001", "meetingTime" : "2011-03-21 09:00", "duration" : 2},
+                {"bookingTime" : "2011-03-16 12:34:56", "emp" : "EMP002", "meetingTime" : "2011-03-21 09:00", "duration" : 2},
+                {"bookingTime" : "2011-03-16 09:28:23", "emp" : "EMP003", "meetingTime" : "2011-03-22 14:00", "duration" : 2},
+                {"bookingTime" : "2011-03-17 11:23:45", "emp" : "EMP004", "meetingTime" : "2011-03-22 16:00", "duration" : 1},
+                {"bookingTime" : "2011-03-15 17:29:12", "emp" : "EMP005", "meetingTime" : "2011-03-21 16:00", "duration" : 3}
+            ]</textarea>
         <button type="submit" onclick="sendForm()">Reserve</button>
     </form>
 
@@ -53,20 +58,16 @@
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(message),
             dataType: 'json',
-            async: true,
+            async: false,
             success: function(result) {
-//                alert(result)
-                console.log(result)
-                alert("TEST")
+                alert("OK");
             },
             error: function (jqXHR, testStatus, errorThrown) {
-//                alert(jqXHR.status + ' ' + jqXHR.responseText)
-                alert("ERROR")
+                alert(jqXHR.status + ' ' + jqXHR.responseText)
             }
         });
 
     }
-
 </script>
 
 </body>
