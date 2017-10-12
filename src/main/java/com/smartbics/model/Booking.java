@@ -59,28 +59,4 @@ public class Booking {
 		result = 31 * result + duration;
 		return result;
 	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		if (!super.equals(o)) return false;
-
-		Booking booking = (Booking) o;
-
-		if (duration != booking.duration) return false;
-		if (bookingTime != null ? !bookingTime.equals(booking.bookingTime) : booking.bookingTime != null) return false;
-		if (emp != null ? !emp.equals(booking.emp) : booking.emp != null) return false;
-		return meetingTime != null ? meetingTime.equals(booking.meetingTime) : booking.meetingTime == null;
-	}
-
-	@Override
-	public int hashCode() {
-		int result = super.hashCode();
-		result = 31 * result + (bookingTime != null ? bookingTime.hashCode() : 0);
-		result = 31 * result + (emp != null ? emp.hashCode() : 0);
-		result = 31 * result + (meetingTime != null ? meetingTime.hashCode() : 0);
-		result = 31 * result + duration;
-		return result;
-	}
 }
