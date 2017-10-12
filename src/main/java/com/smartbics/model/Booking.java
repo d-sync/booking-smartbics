@@ -36,10 +36,4 @@ public class Booking {
 		return meetingTime.toLocalDate();
 	}
 
-	public Booking(LocalDateTime bookingTime, String emp, LocalDateTime meetingTime, int duration) {
-		this.bookingTime = bookingTime;
-		this.emp = emp;
-		this.meetingTime = meetingTime;
-		this.duration = duration;
-	}
 }
