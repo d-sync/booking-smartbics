@@ -55,4 +55,24 @@ public class Meeting {
 				" " + info +
 				"}";
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+
+		Meeting meeting = (Meeting) o;
+
+		if (date != null ? !date.equals(meeting.date) : meeting.date != null) return false;
+		return info != null ? info.equals(meeting.info) : meeting.info == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + (date != null ? date.hashCode() : 0);
+		result = 31 * result + (info != null ? info.hashCode() : 0);
+		return result;
+	}
 }
